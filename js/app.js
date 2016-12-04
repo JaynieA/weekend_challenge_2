@@ -35,6 +35,7 @@ var init = function() {
   }); // end on click for #prevButton
   $('#nextButton').on('click', function(){
     console.log('next button clicked');
+    displayNext(contentArray);
   }); // end on click for #nextButton
 }; // end init
 
@@ -89,3 +90,18 @@ var displayPrev = function(array) {
   } // end if/else
   changeContent(array, $toDisplay);
 }; // end displayPrev
+
+var displayNext = function(array) {
+  console.log('in displayNext');
+  //get index of currently visible content
+  var $visibleIndex = $('.content').find('.visible').data('index');
+  var $toDisplay;
+  var $lastIndex = array.length - 1;
+  console.log($visibleIndex, $toDisplay, $lastIndex);
+  if ($visibleIndex === $lastIndex) {
+    $toDisplay = 0;
+  } else {
+    $toDisplay = $visibleIndex + 1;
+  }
+  changeContent(array, $toDisplay);
+}; // end displayNext
