@@ -1,0 +1,30 @@
+// --COLORS --
+$green: #439f46;
+$white : #fff;
+$darkGrey: #515150;
+$darkGreyHover: darken($darkGrey, 5%);
+$transparentBkg: rgba(0,0,0,.7);
+$transparentBkgHover: rgba(0,0,0,.8);
+
+// -- FONTS --
+$main-font: 'Roboto', sans-serif;
+$header-font: 'Spinnaker', sans-serif;
+
+// -- MIXINS --
+@mixin arrow-rotate($deg) {
+  -moz-transform:rotate($deg);
+  -webkit-transform:rotate($deg);
+  -o-transform:rotate($deg);
+  -ms-transform:rotate($deg);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(SizingMethod='auto expand', M11=-0.7071067811865476, M12=0.7071067811865475, M21=-0.7071067811865475, M22=-0.7071067811865476)";
+}
+@mixin text-shadow {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+@mixin background-size($bkg-size) {
+  -webkit-background-size: $bkg-size;
+  -moz-background-size: $bkg-size;
+  -o-background-size: $bkg-size;
+  background-size: $bkg-size;
+}

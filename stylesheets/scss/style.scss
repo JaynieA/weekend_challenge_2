@@ -1,0 +1,138 @@
+@import "settings";
+
+/* -- GLOBALS --*/
+html,
+body {
+  font-family: $main-font;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: url('../../images/up.jpeg') no-repeat center center fixed;
+  @include background-size(cover);
+  overflow-x: hidden;
+}
+h1 {
+  color: $white;
+}
+hr {
+  margin-top: 0px;
+  margin-bottom: 8px;
+  width: 50px;
+}
+/* -- LAYOUT --*/
+.container {
+  margin-top: 1%;
+}
+.main-row {
+  height: 700px;
+  position: relative;
+  // background-color: blue;
+}
+.content{
+  // background-color: yellow;
+  height: 100%;
+  .tau-student {
+    // background-color: green;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 90%;
+  }
+  .avatar-text {
+    height: 150px;
+    background-color: $transparentBkg;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    color: $white;
+    padding: 10px;
+    border: 4px solid $white;
+    box-shadow: 0 1px 2px rgba(0,0,0,.075);
+    .avatar-name {
+      font-size: 18px;
+      text-transform: uppercase;
+      font-family: $header-font;
+      @include text-shadow;
+    }
+    .avatar-index {
+      background-color: $transparentBkgHover;
+      padding: 5px;
+      width: 60px;
+      margin: 0 auto;
+    }
+  }
+  .avatar-img {
+    margin: 0 auto;
+    margin-bottom: 15px;
+  }
+}
+.slider-contain {
+  height: 80px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  padding: 20px;
+  .goto-contain {
+    display: inline-block;
+  }
+  .goto-btn {
+    height: 40px;
+    width: auto;
+    cursor: pointer;
+    padding: 10px 12px;
+    color: $white;
+    margin: 3px;
+    border-radius: 50%;
+    @include text-shadow;
+  }
+}
+.main-btn {
+  background-color: $transparentBkg;
+  &:hover {
+    background-color: $transparentBkgHover;
+  }
+}
+.arrow {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%; bottom: 50%;
+  transform: translateY(-50%);
+  left: 25%;
+  cursor: pointer;
+  &:hover {
+    .control-btn {
+      border-top-color: $darkGrey;
+      border-right-color: $darkGrey;
+    }
+  }
+}
+.control-contain {
+  // background-color: red;
+  height: 100%;
+  .control-btn{
+    position: absolute;
+    top: 25%; left: 40%;
+    transform: translate(-50%,-50%);
+    width: 50%;
+    height: 50%;
+    background-color: transparent;
+    border-left: none;
+    border-bottom: none;
+    border-top:5px solid $white;
+    border-right:5px solid $white;
+    border-radius: 4px;
+    &:focus {
+      outline: none;
+    }
+  }
+  .next-btn {
+    left: 15%;
+    @include arrow-rotate(45deg);
+  }
+  .prev-btn {
+    left: 35%;
+    @include arrow-rotate(225deg);
+  }
+}
