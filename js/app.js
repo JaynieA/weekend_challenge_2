@@ -34,11 +34,11 @@ var init = function() {
   startTimer();
   //event listeners
   $('#prevButton').on('click', function() {
-    displayPrev(contentArray);
+    displayPrevOrNext(contentArray, 'prev');
   }); // end on click for #prevButton
   $('#nextButton').on('click', function(){
     console.log('next button clicked');
-    displayNext(contentArray);
+    displayPrevOrNext(contentArray, 'next');
   }); // end on click for #nextButton
   $('.goto-contain').on('click', function() {
     //get data-index of button clicked
@@ -87,38 +87,32 @@ var changeContent = function(array, index) {
   }); // end fadeOut
 }; // end displayContent
 
-var displayPrev = function(array) {
-  console.log('in displayPrev');
+var displayPrevOrNext = function(array, direction) {
+  console.log('in displayPrevOrNext');
   //get index of currently visible content
   var $visibleIndex = $('.content').find('.visible').data('index');
   var $toDisplay;
-  //calculate index prior to currently visible content, wrap if index 0
-  if ($visibleIndex === 0) {
-    $toDisplay = array.length -1;
-  } else {
-    $toDisplay = $visibleIndex - 1;
-  } // end if/else
+  //figure out direction of button pushed
+  if (direction === 'prev') {
+    //calculate index prior to currently visible content, wrap if index 0
+    if ($visibleIndex === 0) {
+      $toDisplay = array.length -1;
+    } else {
+      $toDisplay = $visibleIndex - 1;
+    } // end if/else
+  } else if (direction === 'next') {
+    var $lastIndex = array.length - 1;
+    //calculate next index after currently visible content, wrap if index is last in array
+    if ($visibleIndex === $lastIndex) {
+      $toDisplay = 0;
+    } else {
+      $toDisplay = $visibleIndex + 1;
+    } // end if/else
+  } // end else/if
   changeContent(array, $toDisplay);
   //reset timer
   startTimer();
-}; // end displayPrev
-
-var displayNext = function(array) {
-  console.log('in displayNext');
-  //get index of currently visible content
-  var $visibleIndex = $('.content').find('.visible').data('index');
-  var $toDisplay;
-  var $lastIndex = array.length - 1;
-  //calculate next index after currently visible content, wrap if index is last in array
-  if ($visibleIndex === $lastIndex) {
-    $toDisplay = 0;
-  } else {
-    $toDisplay = $visibleIndex + 1;
-  } // end if/else
-  changeContent(array, $toDisplay);
-  //reset timer
-  startTimer();
-}; // end displayNext
+};
 
 var startTimer = function() {
   console.log('in start timer');
