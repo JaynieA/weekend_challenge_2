@@ -16,9 +16,9 @@ $(document).ready(function() {
         tauer.index = counter;
         counter ++;
         //add go-to buttons to the DOM
-        $('.slider-contain').append('<div class="goto-contain"></div>');
+        $('.slider-contain').append('<div class="goto-contain" data-index="'+ tauer.index +'"></div>');
         var $goTo = $('.slider-contain').children().last();
-        $goTo.append('<div class="goto-btn main-btn" data-index="'+ tauer.index +'">' + tauer.first_name + '</div>');
+        $goTo.append('<div class="goto-btn main-btn" >' + tauer.first_name + '</div>');
       } // end for
       console.log(contentArray); // logs complete content array
       init();
@@ -37,6 +37,11 @@ var init = function() {
     console.log('next button clicked');
     displayNext(contentArray);
   }); // end on click for #nextButton
+  $('.goto-contain').on('click', function() {
+    //get data-index of button clicked
+    var $indexClicked = $(this).data('index');
+    changeContent(contentArray, $indexClicked);
+  });// end on click for .goto-contain
 }; // end init
 
 var generateContent = function(array) {
@@ -97,11 +102,11 @@ var displayNext = function(array) {
   var $visibleIndex = $('.content').find('.visible').data('index');
   var $toDisplay;
   var $lastIndex = array.length - 1;
-  console.log($visibleIndex, $toDisplay, $lastIndex);
+  //calculate next index after currently visible content, wrap if index is last in array
   if ($visibleIndex === $lastIndex) {
     $toDisplay = 0;
   } else {
     $toDisplay = $visibleIndex + 1;
-  }
+  } // end if/else
   changeContent(array, $toDisplay);
 }; // end displayNext
