@@ -1,5 +1,7 @@
-
+var TIMER_FREQUENCY = 10000;
 var contentArray = [];
+var myInterval = 0;
+
 $(document).ready(function() {
   //make ajax call to pull down JSON Data
   $.ajax({
@@ -29,6 +31,7 @@ $(document).ready(function() {
 var init = function() {
   console.log('ajax success!');
   generateContent(contentArray);
+  startTimer();
   //event listeners
   $('#prevButton').on('click', function() {
     displayPrev(contentArray);
@@ -41,6 +44,8 @@ var init = function() {
     //get data-index of button clicked
     var $indexClicked = $(this).data('index');
     changeContent(contentArray, $indexClicked);
+    //reset timer
+    startTimer();
   });// end on click for .goto-contain
 }; // end init
 
@@ -94,6 +99,8 @@ var displayPrev = function(array) {
     $toDisplay = $visibleIndex - 1;
   } // end if/else
   changeContent(array, $toDisplay);
+  //reset timer
+  startTimer();
 }; // end displayPrev
 
 var displayNext = function(array) {
@@ -109,4 +116,15 @@ var displayNext = function(array) {
     $toDisplay = $visibleIndex + 1;
   } // end if/else
   changeContent(array, $toDisplay);
+  //reset timer
+  startTimer();
 }; // end displayNext
+
+var startTimer = function() {
+  console.log('in start timer');
+  //displayNext() at TIMER_FREQUENCY if user is not clicking
+  if (myInterval > 0) {
+    clearInterval(myInterval);
+  }
+  myInterval = setInterval('displayNext(contentArray)', TIMER_FREQUENCY);
+}; // end startTimer
