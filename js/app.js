@@ -28,7 +28,6 @@ $(document).ready(function() {
 }); // end doc ready
 
 var init = function() {
-  console.log('in init');
   generateContent(contentArray);
   startTimer();
   //event listeners
@@ -36,7 +35,6 @@ var init = function() {
     displayPrevOrNext(contentArray, 'prev');
   }); // end on click for #prevButton
   $('#nextButton').on('click', function(){
-    console.log('next button clicked');
     displayPrevOrNext(contentArray, 'next');
   }); // end on click for #nextButton
   $('.goto-contain').on('click', function() {
@@ -48,33 +46,7 @@ var init = function() {
   });// end on click for .goto-contain
 }; // end init
 
-var generateContent = function(array) {
-  console.log('in generateContent');
-  var position;
-  //iterate through array to generate content, display on DOM
-  for (var i = 0; i < array.length; i++) {
-    var tauer = array[i];
-    //add class .visible to first .tau-student on load
-    if (tauer.index === 0) {
-      $('.content').append('<div class="tau-student visible" data-index="'+ tauer.index +'"></div>');
-    } else {
-      $('.content').append('<div class="tau-student" data-index="'+ tauer.index +'"></div>');
-    } // end if/else
-    var $el = $('.content').children().last();
-    $el.append('<img class="avatar-img img-responsive thumbnail" src="'+ tauer.picUrl +'" alt="'+ tauer.first_name +'">');
-    $el.append('<div class="avatar-text"></div>');
-    var $outputText = $el.find('.avatar-text');
-    $outputText.append('<p class="avatar-name">' + tauer.first_name + ' ' + tauer.last_name + '</p><hr>');
-    $outputText.append('<p class="avatar-info">' + tauer.info + '</p>');
-    position = tauer.index + 1;
-    $outputText.append('<p class="avatar-index">' + position + '/' + array.length + '</p>');
-  } // end for
-  //add .visible class to first student so it shows
-
-}; // end generateContent
-
 var changeContent = function(array, index) {
-  console.log('in displayContent');
   var $visible = $('.content').find('.visible');
   //fadeOut previously visible content and remove .visible
   $visible.fadeOut('slow', function() {
@@ -87,7 +59,6 @@ var changeContent = function(array, index) {
 }; // end displayContent
 
 var displayPrevOrNext = function(array, direction) {
-  console.log('in displayPrevOrNext');
   //get index of currently visible content
   var $visibleIndex = $('.content').find('.visible').data('index');
   var $toDisplay;
@@ -111,10 +82,31 @@ var displayPrevOrNext = function(array, direction) {
   changeContent(array, $toDisplay);
   //reset timer
   startTimer();
-};
+}; // end displayPrevOrNext
+
+var generateContent = function(array) {
+  var position;
+  //iterate through array to generate content, display on DOM
+  for (var i = 0; i < array.length; i++) {
+    var tauer = array[i];
+    //add class .visible to first .tau-student on load
+    if (tauer.index === 0) {
+      $('.content').append('<div class="tau-student visible" data-index="'+ tauer.index +'"></div>');
+    } else {
+      $('.content').append('<div class="tau-student" data-index="'+ tauer.index +'"></div>');
+    } // end if/else
+    var $el = $('.content').children().last();
+    $el.append('<img class="avatar-img img-responsive thumbnail" src="'+ tauer.picUrl +'" alt="'+ tauer.first_name +'">');
+    $el.append('<div class="avatar-text"></div>');
+    var $outputText = $el.find('.avatar-text');
+    $outputText.append('<p class="avatar-name">' + tauer.first_name + ' ' + tauer.last_name + '</p><hr>');
+    $outputText.append('<p class="avatar-info">' + tauer.info + '</p>');
+    position = tauer.index + 1;
+    $outputText.append('<p class="avatar-index">' + position + '/' + array.length + '</p>');
+  } // end for
+}; // end generateContent
 
 var startTimer = function() {
-  console.log('in start timer');
   //displayNext() at TIMER_FREQUENCY if user is not clicking
   if (myInterval > 0) {
     clearInterval(myInterval);
