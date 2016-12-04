@@ -32,11 +32,14 @@ hr {
 .content {
   height: 100%; }
   .content .tau-student {
+    display: none;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 90%; }
+  .content .visible {
+    display: inline-block; }
   .content .avatar-text {
     height: 150px;
     background-color: rgba(0, 0, 0, 0.7);
