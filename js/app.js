@@ -22,14 +22,13 @@ $(document).ready(function() {
         var $goTo = $('.slider-contain').children().last();
         $goTo.append('<div class="goto-btn main-btn" >' + tauer.first_name + '</div>');
       } // end for
-      console.log(contentArray); // logs complete content array
       init();
     } // end success
   }); // end ajax
 }); // end doc ready
 
 var init = function() {
-  console.log('ajax success!');
+  console.log('in init');
   generateContent(contentArray);
   startTimer();
   //event listeners
@@ -119,6 +118,6 @@ var startTimer = function() {
   //displayNext() at TIMER_FREQUENCY if user is not clicking
   if (myInterval > 0) {
     clearInterval(myInterval);
-  }
-  myInterval = setInterval('displayNext(contentArray)', TIMER_FREQUENCY);
+  } // end if
+  myInterval = setInterval('displayPrevOrNext(contentArray, "next")', TIMER_FREQUENCY);
 }; // end startTimer
